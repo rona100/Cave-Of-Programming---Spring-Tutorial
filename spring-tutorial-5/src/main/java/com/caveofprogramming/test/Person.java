@@ -13,6 +13,19 @@ public class Person {
 	public Person() {
 	}
 	
+	public Person(int id, String name) {
+		this.id = id;
+		this.name = name;
+	}
+	
+	/*
+	 * Notice: that the factory method in the bean MUST be "static".
+	 * */
+	public static Person getInstance(int id, String name) {
+		System.out.println("Creating Person using factory method");
+		return new Person(id, name);
+	}
+	
 	/*
 	 * its registered by the default-init-method global property 
 	 * 
@@ -36,11 +49,6 @@ public class Person {
 	 */
 	public void onDestroy() {
 		System.out.println("Person destoryed: " + this);
-	}
-	
-	public Person(int id, String name) {
-		this.id = id;
-		this.name = name;
 	}
 
 	public void speak(){

@@ -5,17 +5,29 @@
 	default-init-method="init" default-destroy-method="destroy">
 
 
-	<bean id="person" class="com.caveofprogramming.test.Person"
-		scope="singleton" init-method="onCreate" destroy-method="onDestroy">
+	<bean id="person" class="com.caveofprogramming.test.Person" scope="singleton"
+		init-method="onCreate" destroy-method="onDestroy" factory-method="getInstance">
 		<constructor-arg value="777" name="id"></constructor-arg>
 		<constructor-arg value="Mary" name="name"></constructor-arg>
 		<property name="taxId" value="123"></property>
 		<property name="address" ref="address1"></property>
 	</bean>
 
+	<bean id="person2" class="com.caveofprogramming.test.Person"
+		scope="singleton" init-method="onCreate" destroy-method="onDestroy"
+		factory-method="createPerson" factory-bean="personFactory">
+		<constructor-arg value="654" name="id"></constructor-arg>
+		<constructor-arg value="Mike" name="name"></constructor-arg>
+		<property name="taxId" value="321"></property>
+		<property name="address" ref="address1"></property>
+	</bean>
+
 	<bean id="address1" class="com.caveofprogramming.test.Address">
-		<constructor-arg name="street" value="1 Church Lane"></constructor-arg>	
+		<constructor-arg name="street" value="1 Church Lane"></constructor-arg>
 		<constructor-arg name="postcode" value="9876"></constructor-arg>
 	</bean>
-	
+
+	<bean id="personFactory"
+		class="com.caveofprogramming.test.PersonFactory">
+	</bean>
 </beans>
